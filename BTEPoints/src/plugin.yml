@@ -1,0 +1,16 @@
+name: BTEPoints
+version: 1.0
+main: me.elgamer.btepoints.Main
+description: Plugin to add points
+depend: [Essentials]
+
+commands:
+    addpoints:
+        usage: /<command> <user> <points>
+        description: Adds points to a user.
+    removepoints:
+        usage: /<command> <user> <points>
+        description: Removes points to a user.
+    points:
+        usage: /<command>
+        description: Points leaderboard.

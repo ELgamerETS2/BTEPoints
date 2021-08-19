@@ -1,0 +1,16 @@
+#MySQL Info
+
+MySQL_host: localhost
+MySQL_port: 3306
+MySQL_database: test
+MySQL_username: root
+MySQL_password: password
+MySQL_pointsData: points_data
+MySQL_playerData: player_data
+MySQL_weeklyData: weekly_data
+MySQL_data: data
+
+#points
+onlinePoints: 1
+timerInterval: 10
+messagesPerPoint: 30
