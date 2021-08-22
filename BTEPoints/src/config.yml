@@ -9,8 +9,3 @@ MySQL_pointsData: points_data
 MySQL_playerData: player_data
 MySQL_weeklyData: weekly_data
 MySQL_data: data
-
-#points
-onlinePoints: 1
-timerInterval: 10
-messagesPerPoint: 30

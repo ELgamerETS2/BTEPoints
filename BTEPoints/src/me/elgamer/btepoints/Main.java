@@ -9,6 +9,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.elgamer.btepoints.listeners.ChatListener;
+
 public class Main extends JavaPlugin {
 
 	//MySQL
@@ -31,6 +33,8 @@ public class Main extends JavaPlugin {
 
 		//MySQL		
 		mysqlSetup();
+		
+		new ChatListener(this);
 
 		//1 minute timer.
 		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
@@ -78,7 +82,7 @@ public class Main extends JavaPlugin {
 
 				Class.forName("com.mysql.jdbc.Driver");
 				setConnection(DriverManager.getConnection("jdbc:mysql://" + this.host + ":" 
-						+ this.port + "/" + this.database, this.username, this.password + "autoReconnect=true&useSSL=false"));
+						+ this.port + "/" + this.database + "?&useSSL=false&", this.username, this.password));
 
 				Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "MySQL connected to " + config.getString("MySQL_database"));
 			}
