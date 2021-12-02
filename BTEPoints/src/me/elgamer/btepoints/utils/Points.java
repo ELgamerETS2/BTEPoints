@@ -1,7 +1,10 @@
 package me.elgamer.btepoints.utils;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import javax.sql.DataSource;
 
 import me.elgamer.btepoints.Main;
 
@@ -9,11 +12,12 @@ public class Points {
 
 	public static void addPoints(String uuid, int points) {
 
-		Main instance = Main.getInstance();
+		DataSource dataSource = Main.getInstance().dataSource;
 
-		try {
-			PreparedStatement statement = instance.getConnection().prepareStatement
-					("UPDATE " + instance.pointsData + " SET ADD_POINTS=ADD_POINTS+" + points + " WHERE UUID=?");
+		try (Connection conn = dataSource.getConnection(); PreparedStatement statement = conn.prepareStatement(
+				"UPDATE points_data SET add_points=add_points+" + points + " WHERE uuid=?;"
+				)){
+
 			statement.setString(1, uuid);
 
 			statement.executeUpdate();

@@ -1,8 +1,11 @@
 package me.elgamer.btepoints.utils;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.sql.DataSource;
 
 import me.elgamer.btepoints.Main;
 
@@ -10,11 +13,12 @@ public class PlayerData {
 	
 	public static void setBuildTime(String uuid, int time) {
 		
-		Main instance = Main.getInstance();
+		DataSource dataSource = Main.getInstance().dataSource;
 
-		try {
-			PreparedStatement statement = instance.getConnection().prepareStatement
-					("UPDATE " + instance.playerData + " SET BUILDING_TIME=? WHERE UUID=?");
+		try (Connection conn = dataSource.getConnection(); PreparedStatement statement = conn.prepareStatement(
+				"UPDATE player_data SET building_time=? WHERE uuid=?;"
+				)){
+
 			statement.setString(2, uuid);
 			statement.setInt(1, time);
 			
@@ -28,17 +32,18 @@ public class PlayerData {
 	
 	public static int getBuildTime(String uuid) {
 		
-		Main instance = Main.getInstance();
+		DataSource dataSource = Main.getInstance().dataSource;
 
-		try {
-			PreparedStatement statement = instance.getConnection().prepareStatement
-					("SELECT * FROM " + instance.playerData + " WHERE UUID=?");
+		try (Connection conn = dataSource.getConnection(); PreparedStatement statement = conn.prepareStatement(
+				"SELECT building_time FROM player_data WHERE uuid=?;"
+				)){
+
 			statement.setString(1, uuid);
 
 			ResultSet results = statement.executeQuery();
 
 			if (results.next()) {
-				return (results.getInt("BUILDING_TIME"));
+				return (results.getInt("building_time"));
 			} else {
 				return 0;
 			}
