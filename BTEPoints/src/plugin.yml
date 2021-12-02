@@ -1,4 +1,4 @@
 name: BTEPoints
-version: 2.0
+version: 2.1
 main: me.elgamer.btepoints.Main
 description: Basic plugin to allow other plugins to use points.
